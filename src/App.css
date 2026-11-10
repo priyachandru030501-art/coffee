@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@600;800;900&family=Playfair+Display:ital,wght@1,600&display=swap");
+
+:root {
+  --font-heading: "Outfit", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --text-color: #3a2012;
+  --accent: #b5703a;       /* accent colour for the label, italic word, link */
+  --muted: #7a6a60;
+  --bg: #efe3d3;      /* PAGE BACKGROUND colour – change this one line */
+  --card: #3f2314;
+  --hero-bg: #f4efe8;          /* hero background colour – change this one line */
+  --hero-text: #3a2012;        /* hero title colour */
+  --cx: 43.75vw; /* horizontal centre of hero title + cards (same offset as the video) */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); }
+body { background: linear-gradient(180deg, #faf5ec 0%, #efe2d1 50%, #e5d2bc 100%); } /* PAGE BACKGROUND */
+body { font-family: var(--font-body); color: var(--text-color); overflow-x: hidden; }
+section { position: relative; height: 100vh; overflow: hidden; }
+
+.cup { display: block; width: 100%; height: 100%; }
+/* original photo shown as a round "plate" (like the cookies in the video) */
+.photo { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; user-select: none; }
+.cup path, .cup circle, .cup rect, .cup ellipse { shape-rendering: geometricPrecision; }
+
+/* ---------------- 1. HERO ---------------- */
+.hero {
+  background:
+    radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--hero-bg) 82%, #fff) 0%, var(--hero-bg) 70%);
+}
+/* real coffee-bean photo covers the hero; the colour behind it is the fallback + tint */
+.hero-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
+}
+.hero .stage {
+  position: absolute;
+  left: calc(var(--cx) - 50vw);
+  width: 100vw;
+  top: 48%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.coffee-title {
+  font-family: var(--font-heading);
+  font-size: 14vw;
+  font-weight: 900;
+  color: var(--hero-text);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  user-select: none;
+  width: 100%;
+  animation: fadeIn 1.4s ease both;
+}
+.coffee-title span { display: inline-block; }
+.title-placeholder { width: 0.85em; height: 0.85em; flex-shrink: 0; } /* the "O" slot */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.pile {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%; height: 42vh;
+  z-index: 1;
+}
+.falling { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.fall {
+  position: absolute;
+  top: -8vh;
+  height: auto;
+  opacity: .9;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(115vh) rotate(540deg); }
+}
+
+/* ---------------- 2. TASTE THE DIFFERENCE ---------------- */
+.taste .anchor {
+  position: absolute;
+  left: 13.2vw; top: 46.4vh;
+  width: 19.6vw; height: 19.6vw;
+  transform: translate(-50%, -50%);
+}
+  .taste .copy{position:absolute;left:50.3vw;top:50%;transform:translateY(-50%);width:44vw}
+  .taste .eyebrow{display:flex;align-items:center;gap:1vw;font-family:var(--font-heading);font-weight:800;font-size:.95vw;
+        letter-spacing:.32em;text-transform:uppercase;color:var(--accent)}
+  .taste .eyebrow::before{content:"";width:3.4vw;height:2px;background:var(--accent)}
+  .taste h2{font-family:var(--font-heading);font-weight:800;font-size:5.4vw;line-height:1.04;letter-spacing:-.02em;margin:1.6vw 0 1.8vw}
+  .taste h2 em{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;color:var(--accent);letter-spacing:0}
+  .taste p{font-size:1.2vw;line-height:1.6;color:var(--muted);width:37vw}
+  .taste .stats{list-style:none;display:flex;gap:3.2vw;margin-top:2.4vw;padding-top:1.5vw;border-top:1px solid rgba(58,32,18,.22);width:37vw}
+  .taste .stats b{display:block;font-family:var(--font-heading);font-weight:800;font-size:2.5vw;line-height:1}
+  .taste .stats span{display:block;margin-top:.5vw;font-size:.9vw;color:var(--muted)}
+  .taste .more{display:inline-block;margin-top:2vw;font-family:var(--font-heading);font-weight:800;font-size:1.15vw;color:var(--text-color);
+        text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:.25vw}
+  .taste .more:hover{color:var(--accent)}
+
+/* ---------------- 3. PRODUCTS ---------------- */
+.cards {
+  position: absolute;
+  left: 11.1vw; top: 35.8vh;
+  display: flex;
+  gap: 3.6vw;
+}
+.card {
+  position: relative;
+  width: 19.7vw; height: 22vw;
+  background: var(--card);
+  border-radius: 1.7vw;
+  box-shadow: 0 1.2vw 2.4vw rgba(63, 35, 20, .22);
+  text-align: center;
+  color: #fff;
+}
+.card .pic {
+  position: absolute;
+  left: 50%; top: -9.9vw;
+  width: 11.9vw; height: 11.9vw;
+  transform: translateX(-50%);
+  z-index: 2;
+  filter: drop-shadow(0 .8vw 1vw rgba(60, 30, 10, .28));
+}
+.card h4 {
+  position: absolute; left: 0; right: 0; top: 7.4vw;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.45vw;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.card .meta {
+  position: absolute; left: 0; right: 0; top: 9.5vw;
+  font-size: .95vw; font-weight: 500;
+  color: #d9b48a;
+}
+.card .desc {
+  position: absolute; left: 50%; top: 11.2vw;
+  width: 15.6vw; transform: translateX(-50%);
+  font-size: .95vw; line-height: 1.45;
+  color: rgba(255, 255, 255, .68);
+}
+.card .buy {
+  position: absolute; left: 1.8vw; right: 1.8vw; bottom: 1.5vw;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card .price {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.6vw;
+}
+.card button {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.1vw;
+  color: #fff;
+  background: #1b1b1b;
+  border: 1px solid transparent;
+  border-radius: .55vw;
+  padding: .7vw 1.5vw;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.card button:hover,
+.card button.on { border-color: #fff; }
+.card button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------------- scroll-driven cup ---------------- */
+.fly {
+  position: fixed;
+  left: 0; top: 0;
+  z-index: 10;
+  pointer-events: none;
+  will-change: transform, width;
+  filter: drop-shadow(0 1vw 1.3vw rgba(60, 30, 10, .28));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall { animation: none; }
+}
